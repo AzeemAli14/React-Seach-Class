@@ -11,3 +11,7 @@
   border-radius: 3px;
   font-size: 15px;
 }
+
+.component-searchBox:hover {
+  transform: scale(1.05);
+}
