@@ -17,9 +17,6 @@ class App extends React.Component {
 
   onSearch = (event) => {
     const searchString = event.target.value.toLocaleLowerCase();
-    // const filteredMonster = this.state.monsters.filter((monster) => {
-    //   return monster.name.toLocaleLowerCase().includes(searchField)
-    // })
 
     this.setState(() => {
       return { searchField: searchString };
@@ -52,10 +49,13 @@ class App extends React.Component {
 
     return (
       <div className="App">
-
-        <SearchBox onSearchHandler={onSearch} placeholder="Search" className="search-class"/>
+        <h1 className="app-title">Monsters Rolodex</h1>
+        <SearchBox
+          onSearchHandler={onSearch}
+          placeholder="Search"
+          className="search-class"
+        />
         <CardList monsters={filteredMonster} />
-
       </div>
     );
   }

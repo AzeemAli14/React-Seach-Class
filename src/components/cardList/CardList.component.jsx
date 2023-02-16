@@ -1,25 +1,29 @@
-import PropTypes from 'prop-types'
-import React, { Component } from 'react'
+import React, { Component } from "react";
+import './cardList.style.css'
 
 class CardList extends Component {
-
   // console.log("Props: ", props)
   render() {
-
     console.log("Render in Component");
 
-    const {monsters} = this.props;
+    const { monsters } = this.props;
     return (
-      <>
-      {monsters.map((monster) => {
+      <div className="card-list">
+        {monsters.map((monster) => {
+          const { name, email, id } = monster
           return (
-            <div key={monster.id}>
-              <h1>{monster.name}</h1>
+            <div className="card-container" key={id}>
+              <img
+                alt={`monster ${name}`}
+                src={`https://robohash.org/${id}?set=set2&size=180x180`}
+              />
+              <h3>{name}</h3>
+              <p>{email}</p>
             </div>
           );
         })}
-      </>
-    )
+      </div>
+    );
   }
 }
 
