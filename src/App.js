@@ -1,6 +1,8 @@
-import logo from './logo.svg';
-import './App.css';
-import React from 'react';
+import logo from "./logo.svg";
+import "./App.css";
+import React from "react";
+import CardList from "./components/cardList/CardList.component";
+import SearchBox from "./components/searchBox/SearchBox.component";
 
 class App extends React.Component {
   constructor() {
@@ -11,6 +13,17 @@ class App extends React.Component {
       searchField: "",
     };
     console.log("constructor");
+  }
+
+  onSearch = (event) => {
+    const searchString = event.target.value.toLocaleLowerCase();
+    // const filteredMonster = this.state.monsters.filter((monster) => {
+    //   return monster.name.toLocaleLowerCase().includes(searchField)
+    // })
+
+    this.setState(() => {
+      return { searchField: searchString };
+    });
   };
 
   componentDidMount() {
@@ -30,39 +43,22 @@ class App extends React.Component {
   }
 
   render() {
+    const { monsters, searchField } = this.state;
+    const { onSearch } = this;
     console.log("render");
-    const filteredMonster = this.state.monsters.filter((monster) => {
-      return monster.name.toLocaleLowerCase().includes(this.state.searchField)
-    })
+    const filteredMonster = monsters.filter((monster) => {
+      return monster.name.toLocaleLowerCase().includes(searchField);
+    });
 
     return (
       <div className="App">
-        <input
-          className="search-box"
-          type="search"
-          placeholder="Search"
-          onChange={(event) => {
-            const searchString = event.target.value.toLocaleLowerCase();
-            // const filteredMonster = this.state.monsters.filter((monster) => {
-            //   return monster.name.toLocaleLowerCase().includes(searchField)
-            // })
 
-            this.setState(() => {
-              return {searchField: searchString};
-            });
-          }}
-        />
-        {filteredMonster.map((monster) => {
-          return (
-            <div key={monster.id}>
-              <h1>{monster.name}</h1>
-            </div>
-          );
-        })}
+        <SearchBox onSearchHandler={onSearch} placeholder="Search" className="search-class"/>
+        <CardList monsters={filteredMonster} />
+
       </div>
     );
   }
 }
-
 
 export default App;
